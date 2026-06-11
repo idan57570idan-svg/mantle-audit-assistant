@@ -49,7 +49,7 @@ def print_header(result: AuditResult):
         f"  [bold]Pragma:[/bold]    {pragma}\n"
         f"  [bold]Contracts:[/bold] {n_contracts}\n"
         f"  [bold]Lines:[/bold]     {n_lines}\n\n"
-        f"  [bold]Risk Level:[/bold]  [{rc}]{'■ ' * 5 if risk == 'CRITICAL' else '■ ' * 4 if risk == 'HIGH' else '■ ' * 3 if risk == 'MEDIUM' else '■ ' * 2 if risk == 'LOW' else '■ '}[/{rc}] [{rc}]{risk}[/{rc}]\n\n"
+        f"  [bold]Risk Level:[/bold]  [{rc}]{'[*] ' * 5 if risk == 'CRITICAL' else '[*] ' * 4 if risk == 'HIGH' else '[*] ' * 3 if risk == 'MEDIUM' else '[*] ' * 2 if risk == 'LOW' else '[*] '}[/{rc}] [{rc}]{risk}[/{rc}]\n\n"
         f"  [bold red]CRITICAL[/bold red] {counts['CRITICAL']}  "
         f"[red]HIGH[/red] {counts['HIGH']}  "
         f"[yellow]MEDIUM[/yellow] {counts['MEDIUM']}  "
@@ -69,7 +69,7 @@ def print_security_section(result: AuditResult):
 
     findings = result.security_findings
     if not findings:
-        console.print("\n  [bold green]✓ No security vulnerabilities detected.[/bold green]\n")
+        console.print("\n  [bold green][OK] No security vulnerabilities detected.[/bold green]\n")
         return
 
     # Summary table
@@ -118,7 +118,7 @@ def print_gas_section(result: AuditResult):
 
     findings = result.gas_findings
     if not findings:
-        console.print("\n  [bold green]✓ No gas optimizations found.[/bold green]\n")
+        console.print("\n  [bold green][OK] No gas optimizations found.[/bold green]\n")
         return
 
     table = Table(show_header=True, header_style="bold", box=box.SIMPLE_HEAVY,

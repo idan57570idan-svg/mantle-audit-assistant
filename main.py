@@ -67,7 +67,7 @@ def audit(contract, html_out, json_out, no_gas, no_erc8004):
 
     if html_out:
         generate_html(result, html_out)
-        console.print(f"\n[bold green]✓ HTML report saved:[/bold green] {html_out}")
+        console.print(f"\n[bold green][OK] HTML report saved:[/bold green] {html_out}")
 
     if json_out:
         import json
@@ -95,7 +95,7 @@ def audit(contract, html_out, json_out, no_gas, no_erc8004):
         }
         with open(json_out, 'w', encoding='utf-8') as jf:
             json.dump(data, jf, indent=2)
-        console.print(f"[bold green]✓ JSON report saved:[/bold green] {json_out}")
+        console.print(f"[bold green][OK] JSON report saved:[/bold green] {json_out}")
 
 
 @cli.command()
@@ -111,7 +111,7 @@ def security(contract, html_out):
     print_summary(result)
     if html_out:
         generate_html(result, html_out)
-        console.print(f"\n[bold green]✓ HTML report saved:[/bold green] {html_out}")
+        console.print(f"\n[bold green][OK] HTML report saved:[/bold green] {html_out}")
 
 
 @cli.command()
@@ -127,7 +127,7 @@ def gas(contract, html_out):
     print_summary(result)
     if html_out:
         generate_html(result, html_out)
-        console.print(f"\n[bold green]✓ HTML report saved:[/bold green] {html_out}")
+        console.print(f"\n[bold green][OK] HTML report saved:[/bold green] {html_out}")
 
 
 @cli.command()
@@ -143,7 +143,7 @@ def erc8004(contract, html_out):
     print_summary(result)
     if html_out:
         generate_html(result, html_out)
-        console.print(f"\n[bold green]✓ HTML report saved:[/bold green] {html_out}")
+        console.print(f"\n[bold green][OK] HTML report saved:[/bold green] {html_out}")
 
 
 @cli.command()
