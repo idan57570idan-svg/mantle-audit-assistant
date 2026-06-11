@@ -1,0 +1,107 @@
+================================================================
+DORAHACKS SUBMISSION FORM
+Mantle Turing Test Hackathon 2026 — Phase 2: AI Awakening
+================================================================
+Copy-paste each field directly into the DoraHacks submission form.
+================================================================
+
+
+PROJECT NAME
+------------
+Mantle Smart Contract Audit Assistant
+
+
+TAGLINE (one sentence)
+----------------------
+Fully local, zero-API-key Solidity auditor with 55 rules tuned specifically for Mantle L2 — including ERC-8004 Agent Identity NFT compliance checking.
+
+
+TRACK
+-----
+Track 5: AI DevTools
+
+
+SHORT DESCRIPTION (for project card, ~100 words)
+-------------------------------------------------
+A command-line tool that audits Solidity smart contracts for security vulnerabilities, Mantle L2 gas inefficiencies, and ERC-8004 Agent Identity NFT compliance. Unlike generic Ethereum auditors, every rule is calibrated for Mantle's unique properties: the two-component L1+L2 fee model, centralized sequencer timestamp risks, 7-day fraud proof finality window, and the full ERC-8004 three-registry standard (deployed on Mantle mainnet February 2026). 55 rules total. Runs 100% locally — no API key, no network connection. Outputs rich terminal reports and standalone HTML reports.
+
+
+DETAILED DESCRIPTION (for project page, ~400 words)
+----------------------------------------------------
+Most Solidity security tools are built for Ethereum mainnet and miss the characteristics that make Mantle L2 different. The Mantle Smart Contract Audit Assistant is the first static analysis tool designed specifically for the Mantle ecosystem.
+
+WHY MANTLE-SPECIFIC RULES MATTER:
+
+1. Gas Model Inversion
+On Ethereum, storage is the dominant cost. On Mantle L2, the L1 data posting fee accounts for ~90% of transaction cost — the optimization priorities are inverted. Generic auditors recommend reducing storage; on Mantle, you should minimize calldata bytes. Our 15 gas rules reflect this: G-06 catches string revert messages (40+ bytes of calldata vs 4 bytes for a custom error), G-10 flags string state variables (should be IPFS hashes), and G-15 gives Mantle DA / EigenLayer compression hints.
+
+2. Sequencer Manipulation
+Mantle uses a centralized sequencer that can adjust block.timestamp by ±15 seconds and sees all pending transactions before inclusion. Our V-02 rule flags timestamp-dependent logic as HIGH severity with an explicit L2 marker. V-16 flags front-running exposure patterns that are especially dangerous against a centralized sequencer.
+
+3. Finality Assumptions
+Mantle is an optimistic rollup with a 7-day fraud proof window. L2 block confirmation does not equal L1 finality. V-15 catches code that assumes cross-chain settlement is immediate — a common and expensive mistake for protocols bridging from Mantle.
+
+4. ERC-8004 Compliance
+ERC-8004 is Mantle's Agent Identity NFT standard, deployed on mainnet in February 2026. No other auditing tool checks ERC-8004 compliance. Our 15 rules cover all three registry components: Identity Registry (7 required functions, 2 events), Reputation Registry (7 functions including the owner-exclusion constraint on giveFeedback, 2 events), and Validation Registry (4 functions, 1 event). We also verify EIP-712 signature handling on setAgentWallet.
+
+TECHNICAL APPROACH:
+
+The tool uses a pure-Python Solidity parser (regex-based AST-like analysis — no external parser libraries) combined with a rule engine that produces structured findings with severity levels (CRITICAL through INFO), line numbers, and L2-specific annotations. The static analysis approach means it works without deploying contracts or connecting to any network.
+
+OUTPUT:
+- Terminal: color-coded findings table with Rich formatting
+- HTML: self-contained dark-theme report with SVG compliance ring, expandable findings, zero external dependencies
+
+ZERO DEPENDENCIES BEYOND TWO PACKAGES:
+pip install click rich — that is the entire setup. No API keys. No Docker. No blockchain node. Works on any machine with Python 3.10+.
+
+
+GITHUB REPOSITORY
+-----------------
+[Paste your GitHub URL here after pushing]
+
+
+DEMO VIDEO
+----------
+[Record a 2-3 minute screen capture showing:
+  1. python main.py demo  (all 3 sample contracts)
+  2. python main.py audit contracts/vulnerable/reentrancy_example.sol --html report.html
+  3. Open the HTML report in a browser
+]
+
+
+TECH STACK
+----------
+- Language: Python 3.10+
+- CLI framework: Click 8.x
+- Terminal UI: Rich 13.x
+- Analysis: Pure Python static analysis (zero external parser dependencies)
+- Output: Self-contained HTML (vanilla JS, no frameworks)
+- Platform: Cross-platform (Windows, macOS, Linux)
+
+
+WHAT MAKES THIS AN AI DEVTOOL?
+------------------------------
+The tool was designed and built by AI (Claude) encoding expert-level Mantle L2 and ERC-8004 knowledge into static rules. It is an AI-generated expert system for AI agent contract development — specifically serving developers building on ERC-8004, the standard that enables on-chain identity for AI agents on Mantle. The tool helps AI agent developers audit their contracts before deployment without needing a security expert or internet connection.
+
+
+PRIZE ELIGIBILITY
+-----------------
+Track: Track 5 — AI DevTools
+Criteria addressed:
+  [x] Developer productivity tool for the Mantle ecosystem
+  [x] Uses AI-derived knowledge (55 rules encoding L2 + ERC-8004 expertise)
+  [x] Relevant to AI agent development on Mantle (ERC-8004 compliance)
+  [x] Open source
+  [x] Deployed/demonstrable locally without infrastructure
+
+
+TEAM
+----
+[Your name / team name]
+Email: idan57570@gmail.com
+
+
+================================================================
+END OF SUBMISSION FORM
+================================================================
